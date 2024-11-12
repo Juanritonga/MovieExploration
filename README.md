@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -73,3 +74,6 @@ Movie Details App
 A simple React app to browse and view detailed information about movies, using the RapidAPI Movies API. This application is a simple React-based app designed to display movie details. Users can search for movies and view a list of results. Each movie has a dedicated page with complete information, including the title, genres, description, and related images. The app fetches movie data dynamically using RapidAPI. It also features a loading effect with a blurred background while data is being loaded.
 
 To run the app, simply clone the repository, install dependencies, add your RapidAPI key in the file, and use the npm start command to launch the app in development mode.
+=======
+# MovieExploration
+>>>>>>> 0584bacf1d6d75db19135a3ac2fde6eb3af7257c
