@@ -1,0 +1,21 @@
+.movie-card {
+  background-color: #1e1e1e;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+}
+
+.movie-card .card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.movie-card .card-text {
+  font-size: 0.9rem;
+  color: #ccc;
+}

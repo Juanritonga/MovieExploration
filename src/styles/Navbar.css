@@ -1,0 +1,10 @@
+.Navbar {
+  background-color: #120202;
+  padding: 20px 0;
+}
+
+.navbar-title {
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin: 0;
+}
