@@ -73,3 +73,58 @@
   padding: 8px 15px;
   font-size: 14px;
 }
+
+.MovieDetail {
+  background-color: #f8f9fa;
+}
+
+.movie-card {
+  background-color: #1c1f22;
+  color: #ecf0f1;
+  border: none;
+  border-radius: 10px;
+}
+
+.movie-backdrop {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.movie-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  color: #ecf0f1;
+}
+
+.movie-poster {
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.movie-overview {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.list-group-item {
+  background-color: #1d2022;
+  color: #ecf0f1;
+}
+
+@media (max-width: 768px) {
+  .movie-title {
+    font-size: 1.5rem;
+  }
+
+  .movie-poster {
+    max-height: 250px;
+  }
+
+  .movie-backdrop {
+    height: 250px;
+  }
+}

@@ -80,8 +80,8 @@ function FilmList() {
       <Navbar />
       <div className="mt-4">
         <Container>
-          <Row className="justify-content-between mb-4">
-            <Col xs="auto">
+          <Row className="justify-content-between mb-4 g-2">
+            <Col xs={12} sm="auto">
               <Form.Control
                 type="text"
                 placeholder="Search movies..."
@@ -90,7 +90,7 @@ function FilmList() {
                 className="search-input"
               />
             </Col>
-            <Col xs="auto">
+            <Col xs={12} sm="auto">
               <Form.Select
                 value={selectedGenre}
                 onChange={handleGenreChange}
@@ -114,7 +114,9 @@ function FilmList() {
                 </Col>
               ))
             ) : (
-              <p className="text-white bg-dark">No movies found !</p>
+              <p className="text-center text-white bg-dark p-3 rounded">
+                No movies found!
+              </p>
             )}
           </Row>
 

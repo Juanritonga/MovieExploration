@@ -1,6 +1,15 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Spinner,
+  Card,
+  ListGroup,
+} from "react-bootstrap";
 import "../styles/MovieDetail.css";
 
 function MovieDetail() {
@@ -20,8 +29,6 @@ function MovieDetail() {
       },
     };
 
-    console.log(url);
-
     try {
       const response = await fetch(url, options);
       if (!response.ok) {
@@ -31,8 +38,6 @@ function MovieDetail() {
       const result = await response.json();
 
       if (result && result.show) {
-        console.log(result);
-
         setMovie(result.show);
         setError(null);
       } else {
@@ -40,7 +45,6 @@ function MovieDetail() {
         setError("Movie not found");
       }
     } catch (error) {
-      console.error("Failed to fetch movie details:", error);
       setError("Failed to fetch movie details");
     } finally {
       setLoading(false);
@@ -50,6 +54,7 @@ function MovieDetail() {
   useEffect(() => {
     getMovieDetail();
   }, [getMovieDetail]);
+
   if (loading) {
     return (
       <div
@@ -57,13 +62,7 @@ function MovieDetail() {
         style={{ height: "100vh" }}
       >
         <div className="text-center">
-          <div
-            className="spinner-border text-primary"
-            role="status"
-            style={{ width: "3rem", height: "3rem" }}
-          >
-            <span className="visually-hidden">Loading...</span>
-          </div>
+          <Spinner animation="border" variant="primary" size="lg" />
           <p className="mt-3 fs-5 text-muted">Loading...</p>
         </div>
       </div>
@@ -77,44 +76,81 @@ function MovieDetail() {
   if (!movie) {
     return <p>Movie not found</p>;
   }
+
   return (
     <div className="MovieDetail">
-      <div className="movie-container">
-        <button className="btn btn-secondary mb-3" onClick={() => navigate(-1)}>
+      <Container className="py-4">
+        <Button
+          variant="secondary"
+          className="mb-4"
+          onClick={() => navigate(-1)}
+        >
           Back
-        </button>
-        <div className="movie-title">
-          <h1>{movie.original_title}</h1>
-        </div>
-        {movie.backdrop_path && (
-          <div className="movie-backdrop">
-            <img
-              src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-              alt={movie.original_title}
-            />
-          </div>
-        )}
-        <div className="row">
-          {movie.poster_path && (
-            <div className="col-md-4 movie-poster">
-              <img
-                src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-                alt={movie.original_title}
-              />
-            </div>
-          )}
-          <div className="col-md-8 movie-details">
-            <p>{movie.overview}</p>
-            <p>
-              <strong>Genres:</strong>{" "}
-              {movie.genres ? movie.genres.join(", ") : "No genres available"}
-            </p>
-            <p>
-              <strong>First Aired:</strong> {movie.first_aired}
-            </p>
-          </div>
-        </div>
-      </div>
+        </Button>
+
+        <Row className="justify-content-center">
+          <Col xs={12} md={8}>
+            <Card className="movie-card shadow-lg rounded">
+              {movie.backdrop_path && (
+                <Card.Img
+                  variant="top"
+                  src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+                  alt={movie.original_title}
+                  className="movie-backdrop"
+                />
+              )}
+
+              <Card.Body>
+                <Card.Title className="movie-title">
+                  {movie.original_title}
+                </Card.Title>
+                <Row>
+                  {movie.poster_path && (
+                    <Col md={4} className="mb-3">
+                      <Card.Img
+                        variant="top"
+                        src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                        alt={movie.original_title}
+                        className="movie-poster img-fluid rounded"
+                      />
+                    </Col>
+                  )}
+                  <Col md={8}>
+                    <Card.Text className="movie-overview">
+                      {movie.overview}
+                    </Card.Text>
+
+                    <ListGroup variant="flush">
+                      <ListGroup.Item>
+                        <strong>Genres:</strong>{" "}
+                        {movie.genres
+                          ? movie.genres.join(", ")
+                          : "No genres available"}
+                      </ListGroup.Item>
+                      <ListGroup.Item>
+                        <strong>First Aired:</strong> {movie.first_aired}
+                      </ListGroup.Item>
+                      <ListGroup.Item>
+                        <strong>Language:</strong> {movie.language || "Unknown"}
+                      </ListGroup.Item>
+                      <ListGroup.Item>
+                        <strong>Status:</strong> {movie.status || "Unknown"}
+                      </ListGroup.Item>
+                      <ListGroup.Item>
+                        <strong>Runtime:</strong>{" "}
+                        {movie.runtime ? `${movie.runtime} minutes` : "Unknown"}
+                      </ListGroup.Item>
+                      <ListGroup.Item>
+                        <strong>Rating:</strong> {movie.rating || "Not Rated"}
+                      </ListGroup.Item>
+                    </ListGroup>
+                  </Col>
+                </Row>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }
